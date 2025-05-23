@@ -1,0 +1,64 @@
+.termometro-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.tubo {
+    width: 40px;
+    height: 200px;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.nivel {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    transition: height 0.5s ease;
+}
+
+
+
+.rojo {
+    background-color: #dc3545;
+}
+
+.amarillo {
+    background-color: #ffc107;
+}
+
+.verde {
+    background-color: #28a745;
+}
+
+.puntaje-texto {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+.contenedor-termometro {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+}
+
+.etiquetas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    margin-right: 10px;
+}
+
+.etiqueta {
+    font-size: 0.8rem;
+    color: #444;
+    text-align: right;
+    height: 40px;
+}
