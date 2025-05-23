@@ -40,4 +40,6 @@
     font-size: 1.2rem;
     color: #6a1b9a;
     font-weight: 600;
+    text-align: center;
+    max-width: 80%;
 }
