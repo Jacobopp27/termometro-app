@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "../styles/main.css";
+import preguntas from "../data/preguntas";
 
 const Formulario = ({ onSubmitResultado }) => {
-    const [nombre, setNombre] = useState("");
-    const [correo, setCorreo] = useState("");
-    const [respuestas, setRespuestas] = useState(Array(20).fill(""));
+    const [respuestas, setRespuestas] = useState(Array(13).fill(""));
 
     const handleChange = (index, value) => {
         const nuevasRespuestas = [...respuestas];
@@ -14,40 +13,56 @@ const Formulario = ({ onSubmitResultado }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const puntaje = respuestas.reduce((acc, val) => acc + parseInt(val || 0), 0);
+        const puntaje = respuestas.reduce((total, valor) => total + parseInt(valor || 0), 0);
 
         let clasificacion = "";
         if (puntaje <= 14) clasificacion = "Rojo";
         else if (puntaje <= 28) clasificacion = "Amarillo";
         else clasificacion = "Verde";
 
+        const nombre = e.target.nombre?.value || "";
+        const correo = e.target.correo?.value || "";
+
         onSubmitResultado({ nombre, correo, puntaje, clasificacion });
     };
+
+    let preguntaIndex = 0;
 
     return (
         <form onSubmit={handleSubmit}>
             <h2>Formulario de Evaluación</h2>
 
             <label>Nombre:</label>
-            <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+            <input type="text" name="nombre" required />
 
-            <label>Correo electrónico:</label>
-            <input type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
+            <label>Correo:</label>
+            <input type="email" name="correo" required />
 
-            {respuestas.map((respuesta, index) => (
-                <div key={index}>
-                    <label>Pregunta {index + 1}:</label>
-                    <select value={respuesta} onChange={(e) => handleChange(index, e.target.value)} required>
-                        <option value="">Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
+            {preguntas.map((seccion, i) => (
+                <div key={i}>
+                    <h3>{seccion.seccion}</h3>
+                    {seccion.items.map((pregunta, j) => {
+                        const idx = preguntaIndex++;
+                        return (
+                            <div key={idx}>
+                                <label>{pregunta.texto}</label>
+                                <select
+                                    value={respuestas[idx]}
+                                    onChange={(e) => handleChange(idx, e.target.value)}
+                                    required
+                                >
+                                    <option value="">Selecciona una opción</option>
+                                    {pregunta.opciones.map((opcion, k) => (
+                                        <option key={k} value={k}>{opcion}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        );
+                    })}
                 </div>
             ))}
 
-            <button type="submit">Enviar</button>
+            <button type="submit">Evaluar</button>
         </form>
     );
 };
