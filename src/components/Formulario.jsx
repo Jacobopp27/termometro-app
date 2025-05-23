@@ -16,9 +16,10 @@ const Formulario = ({ onSubmitResultado }) => {
         const puntaje = respuestas.reduce((total, valor) => total + parseInt(valor || 0), 0);
 
         let clasificacion = "";
-        if (puntaje <= 14) clasificacion = "Rojo";
-        else if (puntaje <= 28) clasificacion = "Amarillo";
+        if (puntaje <= 9) clasificacion = "Rojo";
+        else if (puntaje <= 18) clasificacion = "Amarillo";
         else clasificacion = "Verde";
+
 
         const nombre = e.target.nombre?.value || "";
         const correo = e.target.correo?.value || "";
@@ -45,7 +46,8 @@ const Formulario = ({ onSubmitResultado }) => {
                         const idx = preguntaIndex++;
                         return (
                             <div key={idx}>
-                                <label>{pregunta.texto}</label>
+                                <label>{`${idx + 1}. ${pregunta.texto}`}</label>
+                                
                                 <select
                                     value={respuestas[idx]}
                                     onChange={(e) => handleChange(idx, e.target.value)}
