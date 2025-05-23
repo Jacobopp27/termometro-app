@@ -6,13 +6,22 @@ import SplashScreen from "./components/SplashScreen";
 function App() {
   const [resultado, setResultado] = useState(null);
   const [mostrarSplash, setMostrarSplash] = useState(true);
+  const [mostrarSplashResultado, setMostrarSplashResultado] = useState(false);
 
   const manejarResultado = (data) => {
-    setResultado(data);
+    setMostrarSplashResultado(true);
+    setTimeout(() => {
+      setResultado(data);
+      setMostrarSplashResultado(false);
+    }, 3500);
   };
 
   if (mostrarSplash) {
     return <SplashScreen onFinish={() => setMostrarSplash(false)} />;
+  }
+
+  if (mostrarSplashResultado) {
+    return <SplashScreen texto="Evaluando enfoque de género..." onFinish={() => {}} />;
   }
 
   return (

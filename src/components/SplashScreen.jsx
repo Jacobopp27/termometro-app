@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "./SplashScreen.css";
 
-const SplashScreen = ({ onFinish }) => {
+const SplashScreen = ({ onFinish, texto = "Evalua el enfoque de género de tu proyecto" }) => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             onFinish();
-        }, 2500); // duración de la pantalla
+        }, 3500); // duración aumentada a 3.5s
 
         return () => clearTimeout(timeout);
     }, [onFinish]);
@@ -15,7 +15,7 @@ const SplashScreen = ({ onFinish }) => {
             <div className="splash-termometro">
                 <div className="splash-nivel" />
             </div>
-            <p className="splash-texto">Evaluando enfoque de género...</p>
+            <p className="splash-texto">{texto}</p>
         </div>
     );
 };
