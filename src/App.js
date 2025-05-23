@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import Formulario from "./components/Formulario";
 import Termometro from "./components/Termometro";
-
+import SplashScreen from "./components/SplashScreen";
 
 function App() {
   const [resultado, setResultado] = useState(null);
+  const [mostrarSplash, setMostrarSplash] = useState(true);
 
   const manejarResultado = (data) => {
-    console.log("Resultado recibido:", data);
     setResultado(data);
   };
 
+  if (mostrarSplash) {
+    return <SplashScreen onFinish={() => setMostrarSplash(false)} />;
+  }
+
   return (
-    <div className="App" style={{ maxWidth: "600px", margin: "0 auto", padding: "2rem" }}>
+    <div className="container">
       {!resultado ? (
         <Formulario onSubmitResultado={manejarResultado} />
       ) : (
@@ -23,8 +27,6 @@ function App() {
           <p><strong>Puntaje:</strong> {resultado.puntaje} / 40</p>
           <p><strong>Clasificación:</strong> {resultado.clasificacion}</p>
           <Termometro puntaje={resultado.puntaje} />
-
-
           <button onClick={() => setResultado(null)}>Volver al formulario</button>
         </div>
       )}

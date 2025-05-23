@@ -1,0 +1,43 @@
+.splash-screen {
+    height: 100vh;
+    background: linear-gradient(135deg, #f3e5f5, #f5f5f5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash-termometro {
+    width: 40px;
+    height: 200px;
+    border-radius: 20px;
+    background-color: #e0e0e0;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.splash-nivel {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(to top, #9c27b0, #ab47bc);
+    animation: llenar 2s ease forwards;
+}
+
+@keyframes llenar {
+    from {
+        height: 0;
+    }
+    to {
+        height: 100%;
+    }
+}
+
+.splash-texto {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #6a1b9a;
+    font-weight: 600;
+}
